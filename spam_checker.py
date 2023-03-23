@@ -1,10 +1,10 @@
 import requests
+import config
 
-API_URL = "https://api-inference.huggingface.co/models/mrm8488/bert-tiny-finetuned-sms-spam-detection"
-headers = {"Authorization": "Bearer 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"}
+headers = {"Authorization": f"Bearer {config.SPAM_AUTH_TOKEN}"}
 
 def query(payload):
-	response = requests.post(API_URL, headers=headers, json=payload)
+	response = requests.post(config.API_URL, headers=headers, json=payload)
 	return response.json()
 
 def is_spam(payload):	
@@ -14,8 +14,10 @@ def is_spam(payload):
 
     spam_label = None
     relevant_label = None
+    if not isinstance(output, list):
+        return False
 
-    for e in output:
+    for e in output[0]:
         if e['label'] == 'LABEL_0':
              spam_label = e['score']
         if e['label'] == 'LABEL_1':
