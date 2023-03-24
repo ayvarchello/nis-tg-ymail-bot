@@ -1,4 +1,5 @@
 # Yandex mail to telegram bot with additional spam filter
+The bot sends email to ur telegram group and filter spam. This is useful, cause our generation opens and uses telegram much more often then email.
 
 ## This project demonstrates using of:
 - IMAP protocol to get emails from yandex mail
